@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Class de IA para Abogados 2026 — EDD</title>
+<meta name="description" content="Información detallada de cada Master Class de IA para Abogados 2026, impartida por Joel Gómez Treviño para la Escuela de Derecho Digital.">
+<style>
+  :root{
+    --ink:#12213a;
+    --ink-soft:#4a5a72;
+    --line:#e4e8ef;
+    --bg:#ffffff;
+    --bg-soft:#f7f9fc;
+    --c1:#4b2d83; /* Claude */
+    --c2:#1e8449; /* NotebookLM + Gemini */
+    --c3:#1b4f9c; /* ChatGPT */
+    --c4:#e8720c; /* Legal Prompt Engineering */
+    --c5:#12909a; /* IA Docentes */
+    --c6:#c2185b; /* Uso Seguro */
+    --c7:#6a3fa0; /* Vibe Coding */
+    --edd-cyan:#33c6d6; /* acento icono EDD */
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  header.site{
+    padding:36px 24px 28px;
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .header-logo{
+    height:96px;
+    width:auto;
+    flex:0 0 auto;
+  }
+  .header-text{
+    text-align:left;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  h1.site-title{
+    font-size:clamp(20px,2.6vw,32px);
+    margin:0 0 10px;
+    font-weight:800;
+    letter-spacing:0.3px;
+    white-space:nowrap;
+  }
+  h1.site-title .accent{color:#1b6fa8;}
+  p.site-sub{
+    max-width:560px;
+    margin:0;
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  @media (max-width:640px){
+    .header-inner{
+      flex-direction:column;
+      text-align:center;
+      gap:16px;
+    }
+    .header-logo{height:68px;}
+    .header-text{text-align:center;}
+    h1.site-title{white-space:normal;}
+    p.site-sub{margin:0 auto;}
+  }
+
+  main{
+    max-width:1080px;
+    margin:0 auto;
+    padding:32px 20px 60px;
+  }
+
+  .layout{
+    display:flex;
+    gap:28px;
+    align-items:flex-start;
+  }
+
+  nav.tabs{
+    flex:0 0 260px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    position:sticky;
+    top:20px;
+  }
+  .tab-btn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-align:left;
+    width:100%;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-left:5px solid var(--tab-color, #ccc);
+    border-radius:10px;
+    padding:12px 14px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .tab-btn:hover{background:#eef1f6;}
+  .tab-btn.active{
+    background:var(--tab-color);
+    border-color:var(--tab-color);
+  }
+  .tab-btn.active .tab-date,
+  .tab-btn.active .tab-name{color:#fff;}
+  .tab-icon{font-size:20px;line-height:1;flex:0 0 auto;}
+  .tab-date{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .tab-name{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    color:var(--ink);
+    line-height:1.25;
+    margin-top:2px;
+  }
+
+  /* mobile tab strip */
+  nav.tabs.mobile{
+    display:none;
+  }
+
+  .tabs-wrap{
+    position:relative;
+  }
+  .tabs-hint{
+    display:none;
+  }
+  .tabs-fade{
+    display:none;
+    position:absolute;
+    top:0;
+    bottom:6px;
+    width:36px;
+    pointer-events:none;
+    z-index:2;
+    transition:opacity .2s ease;
+  }
+  .tabs-fade.right{
+    right:0;
+    background:linear-gradient(to right, rgba(255,255,255,0), var(--bg) 85%);
+  }
+  .tabs-fade.left{
+    left:0;
+    background:linear-gradient(to left, rgba(255,255,255,0), var(--bg) 85%);
+  }
+
+  section.panels{
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .panel{
+    display:none;
+    animation:fade .2s ease;
+  }
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  .panel-head{
+    border-radius:14px;
+    padding:22px 24px;
+    color:#fff;
+    background:var(--panel-color,#333);
+    margin-bottom:22px;
+  }
+  .panel-head .badge-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .panel-head .date-pill{
+    background:rgba(255,255,255,.18);
+    padding:4px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+  }
+  .panel-head .icon{font-size:22px;}
+  .panel-head h2{
+    margin:0;
+    font-size:clamp(20px,3vw,28px);
+    font-weight:800;
+  }
+
+  .info-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .info-chip{
+    flex:1 1 150px;
+    background:var(--bg-soft);
+    border:1.5px solid var(--panel-color, var(--line));
+    border-radius:10px;
+    padding:12px 14px;
+  }
+  .info-chip .label{
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:3px;
+  }
+  .info-chip .value{
+    font-size:14px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .info-chip .value-sub{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  .block{
+    margin-bottom:20px;
+  }
+  .block h3{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+    font-weight:700;
+  }
+  .objetivo{
+    font-size:15.5px;
+    line-height:1.65;
+    color:var(--ink);
+    margin:0;
+  }
+  ul.bullets{
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  ul.bullets li{
+    position:relative;
+    padding-left:22px;
+    margin-bottom:10px;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink);
+  }
+  ul.bullets li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:7px;
+    width:8px;height:8px;
+    border-radius:2px;
+    background:var(--panel-color,#333);
+  }
+
+  footer.site{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 20px 50px;
+    border-top:1px solid var(--line);
+  }
+  .footer-title{
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+    text-align:center;
+  }
+  .footer-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    justify-content:center;
+    margin-bottom:24px;
+  }
+  .footer-item{
+    flex:1 1 200px;
+    max-width:240px;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .footer-item--incluye{
+    border:1.5px solid var(--edd-cyan);
+    padding:14px;
+    text-align:center;
+  }
+  .footer-item .ico{font-size:20px;display:block;margin-bottom:6px;}
+  .footer-item .t{font-size:13px;font-weight:700;color:var(--ink);}
+
+  .footer-contact{
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    justify-content:center;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .footer-contact span{display:flex;align-items:center;gap:6px;}
+  .footer-copy{
+    text-align:center;
+    font-size:12px;
+    color:#93a0b3;
+    margin-top:10px;
+  }
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    nav.tabs.desktop{
+      display:flex;
+      flex-direction:row;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+      scroll-padding-left:20px;
+      position:static;
+      gap:8px;
+      padding:2px 20px 10px 2px;
+      margin:0 -2px;
+      width:100%;
+    }
+    .tab-btn{
+      flex:0 0 auto;
+      scroll-snap-align:start;
+      min-width:0;
+      width:auto;
+      flex-direction:row;
+      align-items:center;
+      gap:6px;
+      padding:8px 14px;
+      border-radius:999px;
+      border-left-width:0;
+      box-shadow:inset 3px 0 0 var(--tab-color, #ccc);
+      white-space:nowrap;
+    }
+    .tab-btn.active{box-shadow:none;}
+    .tab-icon{font-size:15px;}
+    .tab-date{display:none;}
+    .tab-name{
+      font-size:12.5px;
+      margin-top:0;
+      white-space:nowrap;
+    }
+
+    .tabs-hint{
+      display:block;
+      font-size:11.5px;
+      color:var(--ink-soft);
+      margin:0 0 6px 2px;
+    }
+    .tabs-hint .arrow{
+      display:inline-block;
+      animation:nudge 1.4s ease-in-out infinite;
+    }
+    @keyframes nudge{
+      0%,100%{transform:translateX(0);}
+      50%{transform:translateX(4px);}
+    }
+    .tabs-fade{display:block;}
+    .tabs-fade.left{opacity:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-inner">
+    <img class="header-logo" src="Logo EDD fondo blanco.png" alt="EDD — Escuela de Derecho Digital">
+    <div class="header-text">
+      <h1 class="site-title">Master Class de <span class="accent">IA</span> para <span class="accent">Abogados</span></h1>
+      <p class="site-sub">Inscríbete hoy y da el salto hacia una práctica jurídica más ágil, competitiva y preparada para el futuro. Cupo limitado: asegura tu lugar y aprende, en vivo, a integrar la IA en tu día a día profesional.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="layout">
+    <div class="tabs-wrap">
+      <p class="tabs-hint">Desliza para ver las 7 Master Class <span class="arrow">→</span></p>
+      <nav class="tabs desktop" id="tabNav"></nav>
+      <div class="tabs-fade left" id="fadeLeft"></div>
+      <div class="tabs-fade right" id="fadeRight"></div>
+    </div>
+    <section class="panels" id="panels"></section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="footer-title">Todos los Master Class incluyen</div>
+  <div class="footer-grid">
+    <div class="footer-item footer-item--incluye"><span class="ico">📡</span><span class="t">Clases en vivo vía Internet</span></div>
+    <div class="footer-item footer-item--incluye"><span class="ico">▶️</span><span class="t">Acceso a las grabaciones</span></div>
+    <div class="footer-item footer-item--incluye"><span class="ico">📄</span><span class="t">Material de apoyo</span></div>
+    <div class="footer-item footer-item--incluye"><span class="ico">🏅</span><span class="t">Constancia digital</span></div>
+  </div>
+
+  <div class="footer-grid">
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">🕕</span>
+      <span class="t">Horario único: 18:30 a 21:00 h (hora CDMX)</span>
+    </div>
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">💳</span>
+      <span class="t">Inversión: $2,450 MXN IVA incluido por cada Master Class</span>
+    </div>
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">🏷️</span>
+      <span class="t">15% de descuento para ANADE y BMA · 30% si te inscribes a 4 o más MC (no acumulables)</span>
+    </div>
+  </div>
+
+  <div class="footer-contact">
+    <span>👤 Instructor: Joel Gómez Treviño</span>
+    <span>📝 Registro: ticketopolis.com</span>
+    <span>✉️ joelgomez@abogado.digital</span>
+  </div>
+  <div class="footer-copy">Escuela de Derecho Digital, A.C. © 2026 — Master Class de IA para Abogados</div>
+</footer>
+
+<script>
+const data = [
+  {
+    id:'claude',
+    color:'var(--c1)',
+    icon:'✳️',
+    date:'5 – 6 Agosto 2026',
+    name:'Claude para Abogados',
+    objetivo:'Esta Master Class convierte a Claude en un verdadero asistente de trabajo diario para el abogado: aprenderás a usarlo para redactar y revisar escritos, contratos y opiniones legales, analizar documentos extensos y organizar expedientes por cliente o proyecto dentro de Proyectos y Artefactos. Saldrás con un flujo de trabajo concreto y replicable en tu despacho, que combina velocidad, calidad y control sobre la confidencialidad de la información que manejas.',
+    bullets:[
+      'Fundamentos de Claude: modelos, planes y diferencias frente a otras IA',
+      'Proyectos y Artefactos: cómo organizar el trabajo por cliente o expediente',
+      'Redacción y revisión de escritos, contratos y opiniones legales',
+      'Análisis y extracción de información de documentos extensos',
+      'Buenas prácticas de confidencialidad y manejo de datos sensibles'
+    ]
+  },
+  {
+    id:'gemini',
+    color:'var(--c2)',
+    icon:'🔎',
+    date:'18 – 19 Agosto 2026',
+    name:'NotebookLM + Gemini para Abogados',
+    objetivo:'Aprenderás a aprovechar el ecosistema de Google aplicado al derecho: NotebookLM para investigar, sintetizar y dar seguimiento a expedientes complejos a partir de tus propias fuentes documentales, y Gemini como asistente integrado a Google Workspace para la redacción y el trabajo del día a día. Al terminar la sesión sabrás construir repositorios de conocimiento por caso o materia, y decidir con criterio cuándo conviene usar cada herramienta frente a otras opciones de IA.',
+    bullets:[
+      'Creación de "notebooks" con expedientes, leyes y jurisprudencia como fuentes',
+      'Generación de resúmenes, líneas de tiempo y mapas conceptuales de casos',
+      'Uso de Gemini para investigación y redacción dentro de Google Workspace',
+      'Comparación práctica frente a Claude y ChatGPT',
+      'Casos de uso para litigio, docencia y gestión del conocimiento'
+    ]
+  },
+  {
+    id:'chatgpt',
+    color:'var(--c3)',
+    icon:'🤖',
+    date:'1 – 2 Septiembre 2026',
+    name:'ChatGPT para Abogados',
+    objetivo:'Un recorrido práctico por ChatGPT y su ecosistema de herramientas (GPTs personalizados, instrucciones a la medida y Code Interpreter) aplicado a la práctica jurídica. El abogado aprenderá a configurar el asistente para su área de especialidad, crear GPTs propios para tareas recurrentes, apoyarse en él para investigación y análisis de datos, y sobre todo, a identificar alucinaciones y errores antes de que lleguen a un cliente o a un tribunal.',
+    bullets:[
+      'Configuración de ChatGPT para trabajo legal (instrucciones y memoria)',
+      'Creación de GPTs especializados por área de práctica',
+      'Uso de Code Interpreter para análisis de datos y documentos',
+      'Investigación jurídica asistida y verificación de fuentes',
+      'Riesgos, alucinaciones y control de calidad en la práctica legal'
+    ]
+  },
+  {
+    id:'prompt',
+    color:'var(--c4)',
+    icon:'💬',
+    date:'15 – 16 Septiembre 2026',
+    name:'Legal Prompt Engineering + Skills',
+    objetivo:'Más allá de escribir instrucciones sueltas, esta Master Class enseña a diseñar prompts jurídicos estructurados y Skills reutilizables que garanticen resultados consistentes, sin importar el modelo de IA que se utilice. El participante aprenderá técnicas de contexto, rol y formato, así como a construir sus propias plantillas para redacción, análisis de riesgo y revisión contractual, reduciendo el tiempo de prueba y error en tareas que se repiten todos los días en el despacho.',
+    bullets:[
+      'Estructura de un prompt jurídico efectivo: contexto, rol, formato y restricciones',
+      'Técnicas avanzadas: cadena de pensamiento, ejemplos y plantillas',
+      'Creación de Skills propias para tareas recurrentes del despacho',
+      'Prompts para redacción, análisis de riesgo y revisión de contratos',
+      'Errores comunes y cómo depurar instrucciones que no funcionan'
+    ]
+  },
+  {
+    id:'docentes',
+    color:'var(--c5)',
+    icon:'🧑‍🏫',
+    date:'29 – 30 Septiembre 2026',
+    name:'IA para Docentes y Conferencistas',
+    objetivo:'Pensada para abogados que además enseñan, capacitan o dan conferencias, esta sesión muestra cómo usar la IA para preparar clases, materiales didácticos y presentaciones de alto impacto en una fracción del tiempo habitual. Se abordará la creación de casos prácticos, dinámicas, infografías y contenido visual para conferencias, así como los límites éticos y de transparencia que debe observar quien enseña frente a un público que también empieza a usar estas herramientas.',
+    bullets:[
+      'Diseño de presentaciones y material didáctico con IA',
+      'Generación de casos prácticos, quizzes y dinámicas para clase',
+      'Creación de imágenes, infografías y video para conferencias',
+      'Uso de IA para investigación y actualización de contenidos',
+      'Ética y transparencia en el uso de IA frente a alumnos y audiencias'
+    ]
+  },
+  {
+    id:'seguro',
+    color:'var(--c6)',
+    icon:'🛡️',
+    date:'13 – 14 Octubre 2026',
+    name:'Uso Seguro y Responsable de la IA en la Abogacía',
+    objetivo:'Una Master Class centrada en los riesgos reales de usar IA en el ejercicio profesional: confidencialidad y secreto profesional, protección de datos personales, alucinaciones y responsabilidad por errores generados por el modelo. El abogado revisará el marco normativo y los criterios que empiezan a emitir los tribunales sobre el uso de IA en litigio, y se llevará un checklist aplicable de inmediato para revisar cualquier trabajo generado con IA antes de entregarlo.',
+    bullets:[
+      'Confidencialidad, secreto profesional y protección de datos personales',
+      'Alucinaciones, verificación de fuentes y responsabilidad por errores de la IA',
+      'Marco normativo y criterios de tribunales sobre el uso de IA en litigio',
+      'Políticas internas de IA para despachos y departamentos jurídicos',
+      'Checklist de uso responsable antes de entregar trabajo generado con IA'
+    ]
+  },
+  {
+    id:'vibe',
+    color:'var(--c7)',
+    icon:'💻',
+    date:'3 – 4 Noviembre 2026',
+    name:'Vibe Coding para Abogados',
+    objetivo:'Una introducción accesible al "vibe coding": crear herramientas propias, como micrositios, calculadoras legales y formularios, usando IA y sin necesidad de saber programar. El abogado aprenderá a automatizar tareas repetitivas de su despacho, publicar proyectos sencillos en plataformas como Netlify, y sobre todo, a reconocer los límites de este enfoque y el momento en que conviene apoyarse en un desarrollador profesional.',
+    bullets:[
+      'Qué es el "vibe coding" y por qué es útil para un despacho',
+      'Creación de calculadoras legales, formularios y micrositios con IA',
+      'Automatización de tareas repetitivas del despacho',
+      'Publicación y despliegue de proyectos sencillos (Netlify y similares)',
+      'Límites, mantenimiento y cuándo contratar a un desarrollador'
+    ]
+  }
+];
+
+const tabNav = document.getElementById('tabNav');
+const panels = document.getElementById('panels');
+
+data.forEach((mc, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (i===0 ? ' active' : '');
+  btn.style.setProperty('--tab-color', mc.color);
+  btn.dataset.id = mc.id;
+  btn.innerHTML = `
+    <span class="tab-icon">${mc.icon}</span>
+    <span>
+      <span class="tab-date">${mc.date}</span>
+      <span class="tab-name">${mc.name}</span>
+    </span>`;
+  btn.addEventListener('click', () => activate(mc.id));
+  tabNav.appendChild(btn);
+
+  const panel = document.createElement('div');
+  panel.className = 'panel' + (i===0 ? ' active' : '');
+  panel.id = 'panel-' + mc.id;
+  panel.style.setProperty('--panel-color', mc.color);
+  panel.innerHTML = `
+    <div class="panel-head" style="background:${mc.color}">
+      <div class="badge-row">
+        <span class="icon">${mc.icon}</span>
+        <span class="date-pill">${mc.date}</span>
+      </div>
+      <h2>${mc.name}</h2>
+    </div>
+
+    <div class="info-strip">
+      <div class="info-chip"><span class="label">Fecha</span><span class="value">${mc.date}</span></div>
+      <div class="info-chip"><span class="label">Horario</span><span class="value">18:30 – 21:00 h (CDMX)</span></div>
+      <div class="info-chip"><span class="label">Inversión</span><span class="value">$2,450 MXN<span class="value-sub">$140 USD</span></span></div>
+      <div class="info-chip"><span class="label">Instructor</span><span class="value">Joel Gómez Treviño</span></div>
+    </div>
+
+    <div class="block">
+      <h3>Objetivo</h3>
+      <p class="objetivo">${mc.objetivo}</p>
+    </div>
+
+    <div class="block">
+      <h3>Contenido</h3>
+      <ul class="bullets">
+        ${mc.bullets.map(b => `<li>${b}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+  panels.appendChild(panel);
+});
+
+function activate(id){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
+  const activeBtn = tabNav.querySelector('.tab-btn.active');
+  if (activeBtn) activeBtn.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
+}
+
+const fadeLeft = document.getElementById('fadeLeft');
+const fadeRight = document.getElementById('fadeRight');
+function updateFades(){
+  const maxScroll = tabNav.scrollWidth - tabNav.clientWidth;
+  fadeLeft.style.opacity = tabNav.scrollLeft > 8 ? '1' : '0';
+  fadeRight.style.opacity = tabNav.scrollLeft < maxScroll - 8 ? '1' : '0';
+}
+tabNav.addEventListener('scroll', updateFades, {passive:true});
+window.addEventListener('resize', updateFades);
+updateFades();
+</script>
+
+</body>
+</html>
