@@ -140,6 +140,17 @@
     transition:background .15s ease, transform .1s ease;
   }
   .tab-btn:hover{background:#eef1f6;}
+  .tab-btn[data-id="servidores"]:hover{
+    background:#fff3b8;
+    border-color:#d4a017;
+    transform:translateX(2px);
+  }
+  .tab-btn[data-id="servidores"].active,
+  .tab-btn[data-id="servidores"].active:hover{
+    background:#a66f00;
+    border-color:#a66f00;
+    transform:none;
+  }
   .tab-btn.active{
     background:var(--tab-color);
     border-color:var(--tab-color);
@@ -633,7 +644,7 @@
         <select class="mobile-select" id="masterClassSelect"></select>
         <div class="mobile-pager" aria-label="Navegación entre secciones">
           <button class="mobile-pager-btn" id="previousClass" type="button">← Anterior</button>
-          <span class="mobile-progress" id="classProgress" aria-live="polite">1 de 9</span>
+          <span class="mobile-progress" id="classProgress" aria-live="polite">1 de 10</span>
           <button class="mobile-pager-btn" id="nextClass" type="button">Siguiente →</button>
         </div>
       </div>
@@ -704,6 +715,38 @@ const data = [
       'Artefactos: crear y editar documentos, diagramas, sitios y herramientas interactivas',
       'Búsqueda web e Investigación para obtener información actual con citas',
       'Conectores e integraciones para consultar aplicaciones, archivos y fuentes de trabajo'
+    ]
+  },
+  {
+    id:'servidores',
+    color:'#a66f00',
+    icon:'🏛️',
+    date:'11, 12 y 13 Agosto 2026',
+    name:'IA para Servidores Públicos',
+    panelName:'Taller de IA para Servidores Públicos',
+    schedule:'18:30 – 21:00 h',
+    price:'$2,750 MXN',
+    priceSub:'IVA incluido',
+    instructorLabel:'Instructores',
+    instructor:'Joel Gómez y Alfredo Delgadillo',
+    registrationUrl:'https://www.ticketopolis.com/talleriasp/',
+    registrationLabel:'Inscríbete a este taller →',
+    objetivo:'Este taller práctico está diseñado para que servidores públicos incorporen la inteligencia artificial a su trabajo cotidiano y aprovechen sus principales herramientas para redactar, analizar, organizar e investigar información. A lo largo de tres sesiones en vivo, los participantes aprenderán a utilizar Claude, ChatGPT y NotebookLM, formular mejores prompts y aplicar estas tecnologías a documentos y tareas propias del servicio público.',
+    bullets:[
+      'Fundamentos de inteligencia artificial generativa y criterios para su uso en el servicio público',
+      'Diseño de prompts claros y efectivos para obtener resultados útiles y verificables',
+      'Redacción, revisión y mejora de documentos con apoyo de IA',
+      'Análisis, síntesis y organización de información extensa',
+      'Investigación asistida por IA y verificación de fuentes',
+      'Aplicación práctica de la IA a tareas y procesos cotidianos de la función pública'
+    ],
+    tools:[
+      'Claude para analizar información, redactar documentos y desarrollar ideas',
+      'ChatGPT para resolver tareas, estructurar contenidos y crear entregables',
+      'NotebookLM para trabajar con fuentes propias y obtener respuestas fundamentadas',
+      'Prompts para comunicar objetivos, contexto, restricciones y formatos',
+      'Documentos: generación, revisión, resumen y transformación de contenidos',
+      'Investigación: búsqueda, contraste y organización de información relevante'
     ]
   },
   {
@@ -897,11 +940,11 @@ data.forEach((mc, i) => {
     </div>
 
     <div class="cover-copy">
-      <p>Este programa de Master Classes ofrece una formación práctica y especializada para incorporar la inteligencia artificial al trabajo jurídico, académico y profesional. A lo largo de siete cursos independientes, aprenderás a utilizar Claude, ChatGPT, NotebookLM y Gemini; diseñar prompts, Skills y flujos de trabajo avanzados; crear materiales para clases y conferencias; proteger información confidencial; reducir alucinaciones; utilizar modelos open source de manera local; y desarrollar herramientas propias mediante vibe coding, aun sin conocimientos de programación.</p>
+      <p>Este programa ofrece una formación práctica y especializada para incorporar la inteligencia artificial al trabajo jurídico, académico y profesional. A través de siete Master Classes y un taller especializado, aprenderás a utilizar Claude, ChatGPT, NotebookLM y Gemini; diseñar prompts, Skills y flujos de trabajo avanzados; crear materiales para clases y conferencias; proteger información confidencial; reducir alucinaciones; utilizar modelos open source de manera local; y desarrollar herramientas propias mediante vibe coding, aun sin conocimientos de programación.</p>
     </div>
 
     <div class="cover-highlights" aria-label="Características del programa">
-      <div class="cover-highlight"><strong>7 Master Classes</strong><span>Elige una sesión o construye tu propia ruta de aprendizaje.</span></div>
+      <div class="cover-highlight"><strong>7 Master Classes + 1 taller</strong><span>Elige una sesión o construye tu propia ruta de aprendizaje.</span></div>
       <div class="cover-highlight"><strong>Aplicación práctica</strong><span>Demostraciones, ejercicios y recomendaciones para necesidades reales.</span></div>
       <div class="cover-highlight"><strong>En vivo y con apoyo</strong><span>Grabación, material de apoyo y constancia digital incluidos.</span></div>
     </div>
@@ -959,18 +1002,19 @@ data.forEach((mc, i) => {
         <span class="icon">${mc.icon}</span>
         <span class="date-pill">${mc.date}</span>
       </div>
-      <h2>${mc.name}</h2>
+      <h2>${mc.panelName || mc.name}</h2>
     </div>
 
     <div class="info-strip">
       <div class="info-chip"><span class="label">Fecha</span><span class="value">${mc.date}</span></div>
-      <div class="info-chip"><span class="label">Horario</span><span class="value">18:30 – 21:00 h<span class="value-sub">Hora de la CDMX</span></span></div>
-      <div class="info-chip"><span class="label">Inversión</span><span class="value">$2,450 MXN<span class="value-sub">$140 USD</span></span></div>
-      <div class="info-chip"><span class="label">Instructor</span><span class="value"><a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a></span></div>
+      <div class="info-chip"><span class="label">Horario</span><span class="value">${mc.schedule || '18:30 – 21:00 h'}<span class="value-sub">Hora de la CDMX</span></span></div>
+      <div class="info-chip"><span class="label">Inversión</span><span class="value">${mc.price || '$2,450 MXN'}<span class="value-sub">${mc.priceSub || '$140 USD'}</span></span></div>
+      <div class="info-chip"><span class="label">${mc.instructorLabel || 'Instructor'}</span><span class="value">${mc.instructor || '<a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a>'}</span></div>
+      ${mc.discount ? `<div class="info-chip"><span class="label">Promoción</span><span class="value">${mc.discount}</span></div>` : ''}
     </div>
 
     <div class="registration-row">
-      <a class="registration-cta" href="${mc.registrationUrl || defaultRegistrationUrl}" target="_blank" rel="noopener noreferrer">Inscríbete a esta Master Class →</a>
+      <a class="registration-cta" href="${mc.registrationUrl || defaultRegistrationUrl}" target="_blank" rel="noopener noreferrer">${mc.registrationLabel || 'Inscríbete a esta Master Class →'}</a>
     </div>
 
     <div class="block">
