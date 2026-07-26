@@ -50,6 +50,22 @@
     max-width:1040px;
     margin:0 auto;
   }
+  .header-home{
+    border-radius:12px;
+    color:inherit;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .header-home .site-title{
+    transition:color .18s ease;
+  }
+  .header-home:hover .site-title{
+    color:#166e9b;
+  }
+  .header-home:focus-visible{
+    outline:3px solid rgba(22,110,155,.25);
+    outline-offset:8px;
+  }
   .header-logo{
     height:96px;
     width:auto;
@@ -254,12 +270,104 @@
     font-size:clamp(20px,3vw,28px);
     font-weight:800;
   }
+  .cover-hero{
+    padding:30px;
+    background:linear-gradient(135deg,#12335b 0%,#156f9e 58%,#21a6b7 100%) !important;
+  }
+  .cover-hero h2{
+    max-width:760px;
+    font-size:clamp(27px,4vw,42px);
+    line-height:1.08;
+  }
+  .cover-lead{
+    max-width:760px;
+    margin:14px 0 0;
+    color:rgba(255,255,255,.92);
+    font-size:clamp(16px,2vw,19px);
+    line-height:1.55;
+  }
+  .cover-copy{
+    color:var(--ink);
+    font-size:17px;
+    line-height:1.7;
+  }
+  .cover-highlights{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+    margin:24px 0;
+  }
+  .cover-highlight{
+    padding:18px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--bg-soft);
+  }
+  .cover-highlight strong{
+    display:block;
+    margin-bottom:5px;
+    color:#166e9b;
+    font-size:18px;
+  }
+  .cover-highlight span{
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .cover-cta{
+    display:inline-flex;
+    align-items:center;
+    min-height:46px;
+    border:0;
+    border-radius:10px;
+    padding:12px 18px;
+    background:#166e9b;
+    color:#fff;
+    font:700 15px/1.2 inherit;
+    cursor:pointer;
+  }
+  .cover-cta:hover{background:#105a80;}
+  .cover-cta:focus-visible{
+    outline:3px solid rgba(22,110,155,.25);
+    outline-offset:3px;
+  }
 
   .info-strip{
     display:flex;
     flex-wrap:wrap;
     gap:14px;
     margin-bottom:22px;
+  }
+  .registration-row{
+    display:flex;
+    justify-content:flex-end;
+    margin:-4px 0 26px;
+  }
+  .registration-cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    border-radius:8px;
+    padding:9px 16px;
+    background:var(--panel-color);
+    color:#fff;
+    font-size:14px;
+    font-weight:500;
+    line-height:1.2;
+    text-align:center;
+    text-decoration:none;
+    box-shadow:0 3px 9px rgba(18,33,58,.11);
+    transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+  }
+  .registration-cta:hover{
+    filter:brightness(.92);
+    transform:translateY(-1px);
+    box-shadow:0 5px 12px rgba(18,33,58,.16);
+  }
+  .registration-cta:focus-visible{
+    outline:3px solid color-mix(in srgb,var(--panel-color) 25%,transparent);
+    outline-offset:3px;
   }
   .info-chip{
     flex:1 1 150px;
@@ -441,6 +549,11 @@
     margin-bottom:6px;
   }
   .footer-contact span{display:flex;align-items:center;gap:6px;}
+  .footer-contact a{
+    color:#166e9b;
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
   .footer-copy{
     text-align:center;
     font-size:12px;
@@ -473,19 +586,28 @@
     .profile-stats{
       grid-template-columns:repeat(2,minmax(0,1fr));
     }
+    .cover-highlights{
+      grid-template-columns:1fr;
+    }
+    .cover-hero{
+      padding:24px 20px;
+    }
+    .registration-cta{
+      width:100%;
+    }
   }
 </style>
 </head>
 <body>
 
 <header class="site">
-  <div class="header-inner">
+  <a class="header-inner header-home" href="#panel-inicio" data-open-cover aria-label="Volver a la portada del programa">
     <img class="header-logo" src="Logo EDD fondo blanco.png" alt="EDD — Escuela de Derecho Digital">
     <div class="header-text">
       <h1 class="site-title">Master Class de <span class="accent">IA</span> para <span class="accent">Abogados</span></h1>
       <p class="site-sub">Inscríbete hoy y da el salto hacia una práctica jurídica más ágil, competitiva y preparada para el futuro. Cupo limitado: asegura tu lugar y aprende, en vivo, a integrar la IA en tu día a día profesional.</p>
     </div>
-  </div>
+  </a>
 </header>
 
 <main>
@@ -496,7 +618,7 @@
         <select class="mobile-select" id="masterClassSelect"></select>
         <div class="mobile-pager" aria-label="Navegación entre secciones">
           <button class="mobile-pager-btn" id="previousClass" type="button">← Anterior</button>
-          <span class="mobile-progress" id="classProgress" aria-live="polite">1 de 8</span>
+          <span class="mobile-progress" id="classProgress" aria-live="polite">1 de 9</span>
           <button class="mobile-pager-btn" id="nextClass" type="button">Siguiente →</button>
         </div>
       </div>
@@ -531,13 +653,21 @@
   </div>
 
   <div class="footer-contact">
-    <span>📝 Registro: Ticketopolis.com | * Descuentos no acumulables</span>
+    <span>📝 Registro: <a href="https://www.ticketopolis.com/masterclassdeia/" target="_blank" rel="noopener noreferrer">Ticketopolis.com</a> | * Descuentos no acumulables</span>
   </div>
   <div class="footer-copy">Escuela de Derecho Digital, A.C. © 2026 — Master Class de IA para Abogados</div>
 </footer>
 
 <script>
 const data = [
+  {
+    id:'inicio',
+    type:'cover',
+    color:'#166e9b',
+    icon:'✨',
+    date:'Programa 2026',
+    name:'Conoce el programa'
+  },
   {
     id:'claude',
     color:'var(--c1)',
@@ -551,6 +681,13 @@ const data = [
       'Redacción y revisión de escritos, contratos y opiniones legales',
       'Análisis y extracción de información de documentos extensos',
       'Buenas prácticas de confidencialidad y manejo de datos sensibles'
+    ],
+    tools:[
+      'Adjuntar y analizar PDFs, contratos, hojas de cálculo y otros documentos',
+      'Proyectos: reunir chats, instrucciones y conocimiento por cliente o expediente',
+      'Artefactos: crear y editar documentos, diagramas, sitios y herramientas interactivas',
+      'Búsqueda web e Investigación para obtener información actual con citas',
+      'Conectores e integraciones para consultar aplicaciones, archivos y fuentes de trabajo'
     ]
   },
   {
@@ -566,6 +703,14 @@ const data = [
       'Uso de Gemini para investigación y redacción dentro de Google Workspace',
       'Comparación práctica frente a Claude y ChatGPT',
       'Casos de uso para litigio, docencia y gestión del conocimiento'
+    ],
+    tools:[
+      'NotebookLM: cargar PDFs, sitios web, videos, audios y archivos de Google Workspace como fuentes',
+      'Chat fundamentado en las fuentes del notebook, con citas verificables',
+      'Resúmenes de audio y video, mapas conceptuales, infografías, presentaciones, fichas y cuestionarios',
+      'Gemini: adjuntar y analizar archivos, investigar en la web y usar Investigación profunda',
+      'Canvas para redactar documentos, programar y crear aplicaciones',
+      'Gems y aplicaciones conectadas para personalizar asistentes e integrarlos con Google Workspace'
     ]
   },
   {
@@ -581,13 +726,21 @@ const data = [
       'Uso de Code Interpreter para análisis de datos y documentos',
       'Investigación jurídica asistida y verificación de fuentes',
       'Riesgos, alucinaciones y control de calidad en la práctica legal'
+    ],
+    tools:[
+      'Chat vs. Work: cuándo conversar y cuándo delegar tareas o entregables',
+      'Adjuntar y analizar archivos; organizar chats, documentos e instrucciones en Proyectos',
+      'Crear imágenes, infografías y sitios',
+      'Búsqueda en la web e Investiga a fondo para consultar y sintetizar fuentes',
+      'Complementos y aplicaciones conectadas para trabajar con servicios externos',
+      'Biblioteca, programación y creación de GPTs personalizados'
     ]
   },
   {
     id:'prompt',
     color:'var(--c4)',
     icon:'💬',
-    date:'15 – 16 Septiembre 2026',
+    date:'22 – 23 Septiembre 2026',
     name:'Legal Prompt Engineering + Skills',
     objetivo:'Más allá de escribir instrucciones sueltas, esta Master Class enseña a diseñar prompts jurídicos estructurados y Skills reutilizables que garanticen resultados consistentes, sin importar el modelo de IA que se utilice. El participante aprenderá técnicas de contexto, rol y formato, así como a construir sus propias plantillas para redacción, análisis de riesgo y revisión contractual, reduciendo el tiempo de prueba y error en tareas que se repiten todos los días en el despacho.',
     bullets:[
@@ -596,6 +749,12 @@ const data = [
       'Creación de Skills propias para tareas recurrentes del despacho',
       'Prompts para redacción, análisis de riesgo y revisión de contratos',
       'Errores comunes y cómo depurar instrucciones que no funcionan'
+    ],
+    sectionTitle:'Enfoques complementarios',
+    tools:[
+      'Context Engineering: organizar hechos, normas, documentos e instrucciones para obtener respuestas jurídicas mejor fundamentadas',
+      'Loop Engineering: diseñar ciclos de revisión, verificación y mejora hasta cumplir criterios jurídicos definidos',
+      'Harness Engineering: integrar la IA con herramientas, permisos y controles para ejecutar flujos legales de forma más confiable'
     ]
   },
   {
@@ -604,11 +763,12 @@ const data = [
     icon:'🧑‍🏫',
     date:'29 – 30 Septiembre 2026',
     name:'IA para Docentes y Conferencistas',
-    objetivo:'Pensada para abogados que además enseñan, capacitan o dan conferencias, esta sesión muestra cómo usar la IA para preparar clases, materiales didácticos y presentaciones de alto impacto en una fracción del tiempo habitual. Se abordará la creación de casos prácticos, dinámicas, infografías y contenido visual para conferencias, así como los límites éticos y de transparencia que debe observar quien enseña frente a un público que también empieza a usar estas herramientas.',
+    objetivo:'Dirigida tanto a docentes como a abogados que enseñan, capacitan o imparten conferencias, esta sesión muestra cómo usar la IA para preparar clases, materiales didácticos y presentaciones de alto impacto en una fracción del tiempo habitual. Se abordará la creación de casos prácticos, podcasts, infografías y contenido visual para conferencias y clases, así como los límites éticos y de transparencia que debe observar quien enseña frente a un público que también empieza a usar estas herramientas.',
     bullets:[
       'Diseño de presentaciones y material didáctico con IA',
-      'Generación de casos prácticos, quizzes y dinámicas para clase',
+      'Generación de casos prácticos, ejercicios, exámenes y dinámicas para clase',
       'Creación de imágenes, infografías y video para conferencias',
+      'Selección de las mejores herramientas chinas y estadounidenses para diseñar materiales gráficos',
       'Uso de IA para investigación y actualización de contenidos',
       'Ética y transparencia en el uso de IA frente a alumnos y audiencias'
     ]
@@ -619,11 +779,13 @@ const data = [
     icon:'🛡️',
     date:'13 – 14 Octubre 2026',
     name:'Uso Seguro y Responsable de la IA en la Abogacía',
-    objetivo:'Una Master Class centrada en los riesgos reales de usar IA en el ejercicio profesional: confidencialidad y secreto profesional, protección de datos personales, alucinaciones y responsabilidad por errores generados por el modelo. El abogado revisará el marco normativo y los criterios que empiezan a emitir los tribunales sobre el uso de IA en litigio, y se llevará un checklist aplicable de inmediato para revisar cualquier trabajo generado con IA antes de entregarlo.',
+    objetivo:'Una Master Class práctica para usar inteligencia artificial en asuntos jurídicos sin perder de vista la confidencialidad, el secreto profesional y la responsabilidad del abogado. Los participantes aprenderán técnicas para reducir y detectar alucinaciones, anonimizar documentos antes de compartirlos con una IA y descargar, instalar y utilizar modelos open source de manera local y sin conexión a Internet.',
     bullets:[
-      'Confidencialidad, secreto profesional y protección de datos personales',
-      'Alucinaciones, verificación de fuentes y responsabilidad por errores de la IA',
-      'Marco normativo y criterios de tribunales sobre el uso de IA en litigio',
+      'Análisis de riesgos jurídicos y profesionales derivados del uso negligente o indebido de IA generativa',
+      'Trucos y métodos de verificación para mitigar alucinaciones y detectar respuestas poco confiables',
+      'Confidencialidad, secreto profesional y protección de datos personales: anonimización de documentos y configuración de privacidad',
+      'Descarga, instalación y uso offline de modelos open source en una computadora personal',
+      'Diferencias entre modelos en la nube y locales, y criterios para decidir qué información nunca debe compartirse con una IA',
       'Políticas internas de IA para despachos y departamentos jurídicos',
       'Checklist de uso responsable antes de entregar trabajo generado con IA'
     ]
@@ -634,12 +796,12 @@ const data = [
     icon:'💻',
     date:'3 – 4 Noviembre 2026',
     name:'Vibe Coding para Abogados',
-    objetivo:'Una introducción accesible al "vibe coding": crear herramientas propias, como micrositios, calculadoras legales y formularios, usando IA y sin necesidad de saber programar. El abogado aprenderá a automatizar tareas repetitivas de su despacho, publicar proyectos sencillos en plataformas como Netlify, y sobre todo, a reconocer los límites de este enfoque y el momento en que conviene apoyarse en un desarrollador profesional.',
+    objetivo:'Una introducción accesible al "vibe coding": crear herramientas propias, como micrositios, calculadoras legales y formularios, usando IA y sin necesidad de saber programar. El abogado aprenderá a automatizar tareas repetitivas de su despacho, publicar proyectos sencillos en plataformas como Netlify y Vercel, y sobre todo, a reconocer los límites de este enfoque y el momento en que conviene apoyarse en un desarrollador profesional.',
     bullets:[
       'Qué es el "vibe coding" y por qué es útil para un despacho',
       'Creación de calculadoras legales, formularios y micrositios con IA',
-      'Automatización de tareas repetitivas del despacho',
-      'Publicación y despliegue de proyectos sencillos (Netlify y similares)',
+      'Creación de flujos para automatizar documentos, cálculos, captura de datos y seguimiento de asuntos',
+      'Publicación y despliegue de proyectos sencillos (Netlify, Vercel y similares)',
       'Límites, mantenimiento y cuándo contratar a un desarrollador'
     ]
   },
@@ -659,41 +821,80 @@ const masterClassSelect = document.getElementById('masterClassSelect');
 const previousClass = document.getElementById('previousClass');
 const nextClass = document.getElementById('nextClass');
 const classProgress = document.getElementById('classProgress');
+let activeId = data[0].id;
+
+const selectPlaceholder = document.createElement('option');
+selectPlaceholder.value = '';
+selectPlaceholder.textContent = 'Selecciona un Master Class';
+selectPlaceholder.disabled = true;
+masterClassSelect.appendChild(selectPlaceholder);
 
 data.forEach((mc, i) => {
   const isProfile = mc.type === 'profile';
-  const btn = document.createElement('button');
-  btn.className = 'tab-btn' + (i===0 ? ' active' : '');
-  btn.style.setProperty('--tab-color', mc.color);
-  btn.dataset.id = mc.id;
-  btn.id = 'tab-' + mc.id;
-  btn.type = 'button';
-  btn.setAttribute('role', 'tab');
-  btn.setAttribute('aria-controls', 'panel-' + mc.id);
-  btn.setAttribute('aria-selected', i===0 ? 'true' : 'false');
-  btn.innerHTML = `
-    <span class="tab-icon">${mc.icon}</span>
-    <span>
-      <span class="tab-date">${isProfile ? 'Instructor' : mc.date}</span>
-      <span class="tab-name">${isProfile ? 'Semblanza curricular' : mc.name}</span>
-    </span>`;
-  btn.addEventListener('click', () => activate(mc.id));
-  tabNav.appendChild(btn);
+  const isCover = mc.type === 'cover';
+  if (!isCover) {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn';
+    btn.style.setProperty('--tab-color', mc.color);
+    btn.dataset.id = mc.id;
+    btn.id = 'tab-' + mc.id;
+    btn.type = 'button';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-controls', 'panel-' + mc.id);
+    btn.setAttribute('aria-selected', 'false');
+    btn.innerHTML = `
+      <span class="tab-icon">${mc.icon}</span>
+      <span>
+        <span class="tab-date">${isProfile ? 'Instructor' : mc.date}</span>
+        <span class="tab-name">${isProfile ? 'Semblanza curricular' : mc.name}</span>
+      </span>`;
+    btn.addEventListener('click', () => activate(mc.id));
+    tabNav.appendChild(btn);
 
-  const option = document.createElement('option');
-  option.value = mc.id;
-  option.textContent = isProfile
-    ? `${i + 1}. Instructor — Semblanza curricular`
-    : `${i + 1}. ${mc.name} — ${mc.date}`;
-  masterClassSelect.appendChild(option);
+    const option = document.createElement('option');
+    option.value = mc.id;
+    option.textContent = isProfile
+      ? `${i}. Instructor — Semblanza curricular`
+      : `${i}. ${mc.name} — ${mc.date}`;
+    masterClassSelect.appendChild(option);
+  }
 
   const panel = document.createElement('div');
   panel.className = 'panel' + (i===0 ? ' active' : '');
   panel.id = 'panel-' + mc.id;
   panel.style.setProperty('--panel-color', mc.color);
   panel.setAttribute('role', 'tabpanel');
-  panel.setAttribute('aria-labelledby', 'tab-' + mc.id);
-  panel.innerHTML = isProfile ? `
+  if (isCover) {
+    panel.setAttribute('aria-label', 'Presentación del programa');
+  } else {
+    panel.setAttribute('aria-labelledby', 'tab-' + mc.id);
+  }
+  panel.innerHTML = isCover ? `
+    <div class="panel-head cover-hero">
+      <div class="badge-row">
+        <span class="icon">${mc.icon}</span>
+        <span class="date-pill">Master Class 2026</span>
+      </div>
+      <h2>Integra la inteligencia artificial a tu práctica profesional</h2>
+      <p class="cover-lead">Una ruta práctica para abogados, docentes y profesionales del derecho que quieren trabajar con mayor agilidad, criterio y seguridad.</p>
+    </div>
+
+    <div class="cover-copy">
+      <p>Este programa de Master Classes ofrece una formación práctica y especializada para incorporar la inteligencia artificial al trabajo jurídico, académico y profesional. A lo largo de siete cursos independientes, aprenderás a utilizar Claude, ChatGPT, NotebookLM y Gemini; diseñar prompts, Skills y flujos de trabajo avanzados; crear materiales para clases y conferencias; proteger información confidencial; reducir alucinaciones; utilizar modelos open source de manera local; y desarrollar herramientas propias mediante vibe coding, aun sin conocimientos de programación.</p>
+    </div>
+
+    <div class="cover-highlights" aria-label="Características del programa">
+      <div class="cover-highlight"><strong>7 Master Classes</strong><span>Elige una sesión o construye tu propia ruta de aprendizaje.</span></div>
+      <div class="cover-highlight"><strong>Aplicación práctica</strong><span>Demostraciones, ejercicios y recomendaciones para necesidades reales.</span></div>
+      <div class="cover-highlight"><strong>En vivo y con apoyo</strong><span>Grabación, material de apoyo y constancia digital incluidos.</span></div>
+    </div>
+
+    <div class="cover-copy">
+      <p>Cada sesión está diseñada para resolver necesidades reales de abogados, docentes, conferencistas, despachos y departamentos jurídicos. Explora las pestañas para conocer las fechas, objetivos y contenidos de cada Master Class.</p>
+    </div>
+
+    <button class="cover-cta" type="button" data-open-course="claude">Explorar los Master Class →</button>
+  ` : isProfile ? `
     <div class="panel-head" style="background:${mc.color}">
       <div class="badge-row">
         <span class="icon">${mc.icon}</span>
@@ -750,6 +951,10 @@ data.forEach((mc, i) => {
       <div class="info-chip"><span class="label">Instructor</span><span class="value"><a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a></span></div>
     </div>
 
+    <div class="registration-row">
+      <a class="registration-cta" href="https://www.ticketopolis.com/masterclassdeia/tickets.aspx" target="_blank" rel="noopener noreferrer">Inscríbete a esta Master Class →</a>
+    </div>
+
     <div class="block">
       <h3>Objetivo</h3>
       <p class="objetivo">${mc.objetivo}</p>
@@ -761,6 +966,15 @@ data.forEach((mc, i) => {
         ${mc.bullets.map(b => `<li>${b}</li>`).join('')}
       </ul>
     </div>
+
+    ${mc.tools ? `
+    <div class="block">
+      <h3>${mc.sectionTitle || 'Herramientas y funciones'}</h3>
+      <ul class="bullets">
+        ${mc.tools.map(tool => `<li>${tool}</li>`).join('')}
+      </ul>
+    </div>
+    ` : ''}
   `;
   panels.appendChild(panel);
 });
@@ -772,9 +986,19 @@ document.querySelectorAll('[data-open-profile]').forEach(link => {
   });
 });
 
+document.querySelectorAll('[data-open-course]').forEach(button => {
+  button.addEventListener('click', () => activate(button.dataset.openCourse));
+});
+
+document.querySelector('[data-open-cover]').addEventListener('click', event => {
+  event.preventDefault();
+  activate('inicio');
+});
+
 function activate(id){
   const activeIndex = data.findIndex(mc => mc.id === id);
   if (activeIndex < 0) return;
+  activeId = id;
 
   document.querySelectorAll('.tab-btn').forEach(b => {
     const isActive = b.dataset.id === id;
@@ -782,7 +1006,7 @@ function activate(id){
     b.setAttribute('aria-selected', isActive ? 'true' : 'false');
   });
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
-  masterClassSelect.value = id;
+  masterClassSelect.value = id === 'inicio' ? '' : id;
   classProgress.textContent = `${activeIndex + 1} de ${data.length}`;
   previousClass.disabled = activeIndex === 0;
   nextClass.disabled = activeIndex === data.length - 1;
@@ -790,11 +1014,11 @@ function activate(id){
 
 masterClassSelect.addEventListener('change', event => activate(event.target.value));
 previousClass.addEventListener('click', () => {
-  const activeIndex = data.findIndex(mc => mc.id === masterClassSelect.value);
+  const activeIndex = data.findIndex(mc => mc.id === activeId);
   if (activeIndex > 0) activate(data[activeIndex - 1].id);
 });
 nextClass.addEventListener('click', () => {
-  const activeIndex = data.findIndex(mc => mc.id === masterClassSelect.value);
+  const activeIndex = data.findIndex(mc => mc.id === activeId);
   if (activeIndex < data.length - 1) activate(data[activeIndex + 1].id);
 });
 
