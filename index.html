@@ -291,6 +291,13 @@
     font-size:17px;
     line-height:1.7;
   }
+  .cover-distinction{
+    margin:22px 0;
+    border-left:4px solid #166e9b;
+    border-radius:0 10px 10px 0;
+    padding:15px 18px;
+    background:#f2f8fb;
+  }
   .cover-highlights{
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
@@ -566,6 +573,14 @@
       flex-direction:column;
       align-items:stretch;
     }
+    .footer-contact{
+      padding:0 12px;
+      line-height:1.6;
+    }
+    .footer-contact span{
+      display:block;
+      text-align:center;
+    }
     .tabs-wrap{
       flex:0 0 auto;
       width:100%;
@@ -674,6 +689,7 @@ const data = [
     icon:'✳️',
     date:'5 – 6 Agosto 2026',
     name:'Claude para Abogados',
+    registrationUrl:'https://www.ticketopolis.com/directedmasterclassclaudeabogados/',
     objetivo:'Esta Master Class convierte a Claude en un verdadero asistente de trabajo diario para el abogado: aprenderás a usarlo para redactar y revisar escritos, contratos y opiniones legales, analizar documentos extensos y organizar expedientes por cliente o proyecto dentro de Proyectos y Artefactos. Saldrás con un flujo de trabajo concreto y replicable en tu despacho, que combina velocidad, calidad y control sobre la confidencialidad de la información que manejas.',
     bullets:[
       'Fundamentos de Claude: modelos, planes y diferencias frente a otras IA',
@@ -815,6 +831,7 @@ const data = [
   }
 ];
 
+const defaultRegistrationUrl = 'https://www.ticketopolis.com/masterclassdeia/tickets.aspx';
 const tabNav = document.getElementById('tabNav');
 const panels = document.getElementById('panels');
 const masterClassSelect = document.getElementById('masterClassSelect');
@@ -891,6 +908,7 @@ data.forEach((mc, i) => {
 
     <div class="cover-copy">
       <p>Cada sesión está diseñada para resolver necesidades reales de abogados, docentes, conferencistas, despachos y departamentos jurídicos. Explora las pestañas para conocer las fechas, objetivos y contenidos de cada Master Class.</p>
+      <p class="cover-distinction">En un mercado cada vez más saturado de cursos y talleres de inteligencia artificial para abogados, este programa se distingue por la solidez de su respaldo académico e institucional. Es una iniciativa de la Escuela de Derecho Digital, institución pionera en Iberoamérica dedicada a la formación de abogados digitales; además, estas clases magistrales son impartidas por un referente internacional y precursor del derecho digital en América Latina.</p>
     </div>
 
     <button class="cover-cta" type="button" data-open-course="claude">Explorar los Master Class →</button>
@@ -952,7 +970,7 @@ data.forEach((mc, i) => {
     </div>
 
     <div class="registration-row">
-      <a class="registration-cta" href="https://www.ticketopolis.com/masterclassdeia/tickets.aspx" target="_blank" rel="noopener noreferrer">Inscríbete a esta Master Class →</a>
+      <a class="registration-cta" href="${mc.registrationUrl || defaultRegistrationUrl}" target="_blank" rel="noopener noreferrer">Inscríbete a esta Master Class →</a>
     </div>
 
     <div class="block">
