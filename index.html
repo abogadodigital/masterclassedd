@@ -642,6 +642,32 @@
     font-size:14.5px;
     line-height:1.6;
   }
+  .testimonial-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:flex-end;
+    margin:-6px 0 14px;
+  }
+  .testimonial-control{
+    min-height:36px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:8px 12px;
+    background:#fff;
+    color:var(--ink-soft);
+    font:700 12px/1.2 inherit;
+    cursor:pointer;
+  }
+  .testimonial-control:hover{
+    border-color:var(--panel-color);
+    color:var(--panel-color);
+    background:var(--bg-soft);
+  }
+  .testimonial-control:focus-visible{
+    outline:3px solid rgba(49,92,109,.2);
+    outline-offset:2px;
+  }
   .testimonial-grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -813,6 +839,12 @@
     .community-subtab{
       width:100%;
     }
+    .testimonial-controls{
+      justify-content:stretch;
+    }
+    .testimonial-control{
+      flex:1 1 0;
+    }
     .cover-highlights{
       grid-template-columns:1fr;
     }
@@ -875,7 +907,11 @@
     </div>
     <div class="footer-item footer-item--incluye">
       <span class="ico">🏷️</span>
-      <span class="t">15% de descuento para ANADE y BMA · 30% si te inscribes a 4 o más Master Classes</span>
+      <span class="t">15% de descuento para miembros de ANADE, BMA, INCAM y exalumnos</span>
+    </div>
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">🏷️</span>
+      <span class="t">30% de descuento si te inscribes a 4 o más Master Classes</span>
     </div>
   </div>
 
@@ -1231,6 +1267,11 @@ data.forEach((mc, i) => {
     <section class="community-subpanel" id="community-testimonials" role="tabpanel" aria-labelledby="community-tab-testimonials" hidden>
       <p class="testimonials-intro">Una selección de experiencias compartidas por exalumnos de nuestros talleres y programas de inteligencia artificial.</p>
 
+      <div class="testimonial-controls" aria-label="Controles de testimonios">
+        <button class="testimonial-control" id="expandAllTestimonials" type="button">Expandir todos</button>
+        <button class="testimonial-control" id="collapseAllTestimonials" type="button">Colapsar todos</button>
+      </div>
+
       <div class="testimonial-grid" id="testimonialGrid">
         <article class="testimonial-card">
           <h3>“Una excelente inversión”</h3>
@@ -1307,7 +1348,7 @@ data.forEach((mc, i) => {
         <article class="testimonial-card testimonial-card--extra">
           <h3>“Fácil de aplicar en lo profesional”</h3>
           <blockquote>“Muy interesante, entretenido, dinámico y completo; el expositor respondió las dudas con paciencia.”</blockquote>
-          <span class="testimonial-author">Susana Andrade · México</span>
+          <span class="testimonial-author">Susana A. · México</span>
         </article>
         <article class="testimonial-card testimonial-card--extra">
           <h3>“El mejor taller que tomé en 2023”</h3>
@@ -1427,6 +1468,27 @@ if (testimonialsMore && testimonialGrid) {
     const isExpanded = testimonialGrid.classList.toggle('expanded');
     testimonialsMore.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
     testimonialsMore.textContent = isExpanded ? 'Mostrar menos testimonios' : 'Ver más testimonios';
+  });
+}
+
+const expandAllTestimonials = document.getElementById('expandAllTestimonials');
+const collapseAllTestimonials = document.getElementById('collapseAllTestimonials');
+if (expandAllTestimonials && collapseAllTestimonials && testimonialGrid) {
+  expandAllTestimonials.addEventListener('click', () => {
+    testimonialGrid.classList.add('expanded');
+    testimonialGrid.querySelectorAll('.testimonial-full').forEach(testimonial => {
+      testimonial.setAttribute('open', '');
+    });
+    if (testimonialsMore) {
+      testimonialsMore.setAttribute('aria-expanded', 'true');
+      testimonialsMore.textContent = 'Mostrar menos testimonios';
+    }
+  });
+
+  collapseAllTestimonials.addEventListener('click', () => {
+    testimonialGrid.querySelectorAll('.testimonial-full').forEach(testimonial => {
+      testimonial.removeAttribute('open');
+    });
   });
 }
 
