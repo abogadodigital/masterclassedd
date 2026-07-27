@@ -536,7 +536,178 @@
     font-size:14.5px;
     line-height:1.65;
   }
-
+  .community-intro{
+    max-width:780px;
+    margin:0 0 22px;
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.65;
+  }
+  .community-subtabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:24px;
+    padding:5px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--bg-soft);
+  }
+  .community-subtab{
+    flex:1 1 0;
+    min-height:44px;
+    border:0;
+    border-radius:8px;
+    padding:10px 14px;
+    background:transparent;
+    color:var(--ink-soft);
+    font:700 14px/1.25 inherit;
+    cursor:pointer;
+  }
+  .community-subtab:hover{
+    background:#edf3f5;
+    color:var(--ink);
+  }
+  .community-subtab.active{
+    background:var(--panel-color);
+    color:#fff;
+    box-shadow:0 2px 8px rgba(18,33,58,.12);
+  }
+  .community-subtab:focus-visible{
+    outline:3px solid rgba(49,92,109,.24);
+    outline-offset:2px;
+  }
+  .community-subpanel{display:none;}
+  .community-subpanel.active{display:block;}
+  .community-stats{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+    margin-bottom:24px;
+  }
+  .community-stat{
+    border:1.5px solid var(--panel-color);
+    border-radius:11px;
+    padding:16px;
+    background:var(--bg-soft);
+    text-align:center;
+  }
+  .community-stat strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--panel-color);
+    font-size:25px;
+    line-height:1;
+  }
+  .community-stat span{
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:700;
+  }
+  .community-groups{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+  .community-group{
+    border:1px solid var(--line);
+    border-radius:11px;
+    background:#fff;
+    overflow:hidden;
+  }
+  .community-group summary{
+    padding:15px 42px 15px 16px;
+    color:var(--ink);
+    font-size:14px;
+    font-weight:800;
+    line-height:1.35;
+    cursor:pointer;
+  }
+  .community-group[open] summary{
+    border-bottom:1px solid var(--line);
+    background:var(--bg-soft);
+  }
+  .community-group ul{
+    margin:0;
+    padding:15px 18px 8px 36px;
+  }
+  .community-group li{
+    margin-bottom:9px;
+    color:var(--ink);
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  .testimonials-intro{
+    margin:0 0 18px;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.6;
+  }
+  .testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+  }
+  .testimonial-card{
+    border:1px solid var(--line);
+    border-top:4px solid var(--panel-color);
+    border-radius:11px;
+    padding:18px;
+    background:var(--bg-soft);
+  }
+  .testimonial-card--extra{display:none;}
+  .testimonial-grid.expanded .testimonial-card--extra{display:block;}
+  .testimonial-card h3{
+    margin:0 0 9px;
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.4;
+  }
+  .testimonial-card blockquote{
+    margin:0 0 12px;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    line-height:1.55;
+  }
+  .testimonial-author{
+    display:block;
+    color:var(--panel-color);
+    font-size:12px;
+    font-weight:800;
+    line-height:1.4;
+  }
+  .testimonial-full{
+    margin:12px 0;
+    border-top:1px solid var(--line);
+    padding-top:10px;
+  }
+  .testimonial-full summary{
+    color:var(--panel-color);
+    font-size:12.5px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .testimonial-full p{
+    margin:9px 0 0;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.55;
+  }
+  .testimonials-more{
+    display:block;
+    min-height:42px;
+    margin:20px auto 0;
+    border:1px solid var(--panel-color);
+    border-radius:9px;
+    padding:10px 18px;
+    background:#fff;
+    color:var(--panel-color);
+    font:700 13px/1.2 inherit;
+    cursor:pointer;
+  }
+  .testimonials-more:hover{
+    background:var(--panel-color);
+    color:#fff;
+  }
   footer.site{
     max-width:1080px;
     margin:0 auto;
@@ -629,6 +800,18 @@
     }
     .profile-stats{
       grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .community-stats,
+    .community-groups,
+    .testimonial-grid{
+      grid-template-columns:1fr;
+    }
+    .community-subtabs{
+      display:grid;
+      grid-template-columns:1fr;
+    }
+    .community-subtab{
+      width:100%;
     }
     .cover-highlights{
       grid-template-columns:1fr;
@@ -883,6 +1066,16 @@ const data = [
     ]
   },
   {
+    id:'comunidad',
+    type:'community',
+    color:'#315c6d',
+    icon:'🤝',
+    date:'Comunidad',
+    name:'Quiénes nos han elegido',
+    tabLabel:'Comunidad y Testimonios',
+    tabName:'Quiénes nos han elegido'
+  },
+  {
     id:'instructor',
     type:'profile',
     color:'#6b7280',
@@ -910,6 +1103,7 @@ masterClassSelect.appendChild(selectPlaceholder);
 data.forEach((mc, i) => {
   const isProfile = mc.type === 'profile';
   const isCover = mc.type === 'cover';
+  const isCommunity = mc.type === 'community';
   if (!isCover) {
     const btn = document.createElement('button');
     btn.className = 'tab-btn';
@@ -923,17 +1117,15 @@ data.forEach((mc, i) => {
     btn.innerHTML = `
       <span class="tab-icon">${mc.icon}</span>
       <span>
-        <span class="tab-date">${isProfile ? 'Instructor' : mc.date}</span>
-        <span class="tab-name">${isProfile ? 'Semblanza curricular' : mc.name}</span>
+        <span class="tab-date">${mc.tabLabel || (isProfile ? 'Instructor' : mc.date)}</span>
+        <span class="tab-name">${mc.tabName || (isProfile ? 'Semblanza curricular' : mc.name)}</span>
       </span>`;
     btn.addEventListener('click', () => activate(mc.id));
     tabNav.appendChild(btn);
 
     const option = document.createElement('option');
     option.value = mc.id;
-    option.textContent = isProfile
-      ? `${i}. Instructor — Semblanza curricular`
-      : `${i}. ${mc.name} — ${mc.date}`;
+    option.textContent = `${i}. ${mc.tabLabel || (isProfile ? 'Instructor' : mc.name)} — ${mc.tabName || (isProfile ? 'Semblanza curricular' : mc.date)}`;
     masterClassSelect.appendChild(option);
   }
 
@@ -973,6 +1165,159 @@ data.forEach((mc, i) => {
     </div>
 
     <button class="cover-cta" type="button" data-open-course="claude">Explorar los Master Class →</button>
+  ` : isCommunity ? `
+    <div class="panel-head" style="background:${mc.color}">
+      <div class="badge-row">
+        <span class="icon">${mc.icon}</span>
+        <span class="date-pill">Comunidad EDD</span>
+      </div>
+      <h2>Profesionales que han aprendido con nosotros</h2>
+    </div>
+
+    <p class="community-intro">Conoce el alcance de nuestros programas de formación y las experiencias de algunos de los profesionales que han incorporado estos conocimientos a su práctica.</p>
+
+    <div class="community-subtabs" role="tablist" aria-label="Información de nuestra comunidad">
+      <button class="community-subtab active" id="community-tab-participants" type="button" role="tab" aria-selected="true" aria-controls="community-participants" data-community-view="participants">Quiénes han cursado nuestros programas</button>
+      <button class="community-subtab" id="community-tab-testimonials" type="button" role="tab" aria-selected="false" aria-controls="community-testimonials" data-community-view="testimonials">Testimonios de exalumnos</button>
+    </div>
+
+    <section class="community-subpanel active" id="community-participants" role="tabpanel" aria-labelledby="community-tab-participants">
+      <div class="community-stats" aria-label="Alcance de nuestros programas">
+        <div class="community-stat"><strong>1,750+</strong><span>participantes</span></div>
+        <div class="community-stat"><strong>7</strong><span>países</span></div>
+        <div class="community-stat"><strong>Desde 2023</strong><span>formación ejecutiva en IA</span></div>
+      </div>
+
+      <p class="community-intro">Abogados de México, Argentina, Chile, Colombia, Ecuador, Paraguay y Portugal han cursado nuestros programas pioneros de capacitación ejecutiva.</p>
+
+      <div class="community-groups">
+        <details class="community-group" open>
+          <summary>Poder judicial y servicio público</summary>
+          <ul>
+            <li>300 abogados postulantes y miembros del Poder Judicial de Ecuador.</li>
+            <li>50 funcionarios del Ministerio Público de Paraguay.</li>
+            <li>10 abogados de la Suprema Corte de Justicia de la Nación.</li>
+          </ul>
+        </details>
+        <details class="community-group" open>
+          <summary>Firmas, empresas y departamentos jurídicos</summary>
+          <ul>
+            <li>80 socios y asociados de una de las firmas de abogados más grandes de México.</li>
+            <li>40 abogados de una empresa líder en venta y distribución de medicamentos genéricos en México y América Latina.</li>
+            <li>Abogados de una importante cadena mexicana de tiendas departamentales de lujo y de una institución prendaria asistencial.</li>
+            <li>Directores y gerentes jurídicos de algunas de las empresas más importantes de México.</li>
+          </ul>
+        </details>
+        <details class="community-group">
+          <summary>Universidades y posgrados</summary>
+          <ul>
+            <li>Más de 80 alumnos de la Maestría en Derecho Digital de UDLA, Ecuador.</li>
+            <li>Más de 75 alumnos de la Maestría en Derecho Empresarial de la Universidad Autónoma de Ciudad Juárez.</li>
+            <li>Más de 60 alumnos de la Especialidad en Derecho de las TIC de la Universidad Panamericana, campus Guadalajara.</li>
+            <li>Profesores y alumnos del Tec de Monterrey y de una destacada universidad privada de Tijuana.</li>
+          </ul>
+        </details>
+        <details class="community-group">
+          <summary>Asociaciones y práctica profesional</summary>
+          <ul>
+            <li>Más de 150 integrantes de ANADE Baja California, además de profesores y alumnos universitarios.</li>
+            <li>Más de 70 integrantes de ANADE Nuevo León, profesores y alumnos del Tec de Monterrey.</li>
+            <li>Centenares de abogados litigantes y corporativos de la región.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section class="community-subpanel" id="community-testimonials" role="tabpanel" aria-labelledby="community-tab-testimonials" hidden>
+      <p class="testimonials-intro">Una selección de experiencias compartidas por exalumnos de nuestros talleres y programas de inteligencia artificial.</p>
+
+      <div class="testimonial-grid" id="testimonialGrid">
+        <article class="testimonial-card">
+          <h3>“Una excelente inversión”</h3>
+          <blockquote>“Si como abogados queremos estar al día en temas de IA, este taller es la mejor opción.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>Sin duda, el tiempo nos llegó y los abogados no somos la excepción. Si queremos estar al día en temas de IA, este taller es la mejor opción. Además, en el foro jurídico latinoamericano hay pocas personas con la experiencia y versatilidad de Joel Gómez. Es un taller obligatorio para quienes quieren trascender.</p></details>
+          <span class="testimonial-author">Fernando C. · Lisboa, Portugal</span>
+        </article>
+        <article class="testimonial-card">
+          <h3>“Con estas tres clases se paga todo el posgrado”</h3>
+          <blockquote>La valoración de un juez sobre el taller de inteligencia artificial incluido en un posgrado en Derecho de las TIC.</blockquote>
+          <span class="testimonial-author">Norberto V. · Guadalajara, Jalisco</span>
+        </article>
+        <article class="testimonial-card">
+          <h3>“Superó mis expectativas”</h3>
+          <blockquote>“Las herramientas presentadas no solo aligeran la carga administrativa, sino que permiten transformar procesos.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>El taller superó mis expectativas. Las herramientas presentadas no solo aligeran la carga administrativa en nuestras tareas diarias, sino que también establecen pautas para transformar los procesos. Concluyo con la mente llena de posibilidades y espero seguir capacitándome con la EDD.</p></details>
+          <span class="testimonial-author">Marian P. · Ensenada, Baja California</span>
+        </article>
+        <article class="testimonial-card">
+          <h3>“La elección correcta es la EDD”</h3>
+          <blockquote>“En un entorno donde proliferan los cursos de IA para abogados, la elección correcta es la Escuela de Derecho Digital.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>Joel es un extraordinario expositor: claro, sencillo y muy generoso al compartir su amplio conocimiento. Cualquiera de los múltiples consejos prácticos que ofrece vale todo el curso.</p></details>
+          <span class="testimonial-author">Sergio B. M. · Ciudad de México</span>
+        </article>
+        <article class="testimonial-card">
+          <h3>“Único y necesario”</h3>
+          <blockquote>“El taller amplió mi perspectiva de la IA y de su aplicación en el trabajo diario de los abogados.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>Quedé muy satisfecha e impactada con la información. Se abordaron herramientas esenciales para que los abogados hagamos más fácil y rápida nuestra labor. Joel explica conceptos complejos de una manera muy accesible y transmite su pasión por la materia.</p></details>
+          <span class="testimonial-author">Tanya C. P. · Ciudad de México</span>
+        </article>
+        <article class="testimonial-card">
+          <h3>“Información de vanguardia”</h3>
+          <blockquote>“Es indispensable que el abogado se mantenga inmerso en estos temas, pues ya forman parte de las consultas profesionales.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>El taller fue muy bueno y presentó información de vanguardia. Es impresionante la velocidad con la que aparecen nuevas aplicaciones y lo necesario que resulta para el abogado conocerlas. El tiempo no alcanza para aprender todo lo que Joel comparte.</p></details>
+          <span class="testimonial-author">Gonzalo M. L. · México</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Extraordinario taller”</h3>
+          <blockquote>“Me quedé con ganas de aprender más y de continuar capacitándome.”</blockquote>
+          <span class="testimonial-author">José V. G. · Querétaro</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Una experiencia gratificante y enriquecedora”</h3>
+          <blockquote>“Despertaron en mí la inquietud de estudiar estos temas, que ahora forman parte de mi investigación doctoral.”</blockquote>
+          <span class="testimonial-author">Alejandra P. O. · Ciudad de México</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Una experiencia excepcional”</h3>
+          <blockquote>“El contenido fue profundamente informativo, claro y accesible incluso para quienes no teníamos experiencia previa.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>Pude aplicar los conceptos en tiempo real, lo que fortaleció mi comprensión y me dio confianza para seguir explorando la inteligencia artificial. Recomendaría este taller a cualquier persona interesada en ampliar sus conocimientos y descubrir nuevas posibilidades profesionales.</p></details>
+          <span class="testimonial-author">Natalia T. G. · Guadalajara, Jalisco</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Excelente taller”</h3>
+          <blockquote>“Te lleva de la mano para entender qué es la IA y cómo comenzar a utilizarla como experto.”</blockquote>
+          <span class="testimonial-author">David A. G. · Ciudad de México</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Superó todas mis expectativas”</h3>
+          <blockquote>“El contenido está cuidadosamente diseñado, probado y estructurado de una manera muy didáctica.”</blockquote>
+          <details class="testimonial-full"><summary>Leer testimonio completo</summary><p>Con o sin experiencia previa en IA, el programa te lleva de la mano para conocer y practicar con diversas herramientas. Además, está impartido de manera impecable.</p></details>
+          <span class="testimonial-author">Adriana L. S. · Ciudad de México</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Muy recomendable”</h3>
+          <blockquote>“El enfoque es verdaderamente práctico y dinámico; el curso siembra con éxito la semilla de la curiosidad.”</blockquote>
+          <span class="testimonial-author">Luis H. · Nayarit</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“El profesor conoce perfectamente el tema”</h3>
+          <blockquote>“En poco tiempo explica con detalle las aplicaciones y su funcionamiento.”</blockquote>
+          <span class="testimonial-author">Ingrid U. · Ciudad de México</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“Fácil de aplicar en lo profesional”</h3>
+          <blockquote>“Muy interesante, entretenido, dinámico y completo; el expositor respondió las dudas con paciencia.”</blockquote>
+          <span class="testimonial-author">Susana Andrade · México</span>
+        </article>
+        <article class="testimonial-card testimonial-card--extra">
+          <h3>“El mejor taller que tomé en 2023”</h3>
+          <blockquote>“Ahora cuento con herramientas de IA que me ayudan a resolver tareas cotidianas en la práctica del derecho.”</blockquote>
+          <span class="testimonial-author">Lorena A. D. · Ciudad de México</span>
+        </article>
+      </div>
+
+      <button class="testimonials-more" id="testimonialsMore" type="button" aria-expanded="false" aria-controls="testimonialGrid">Ver más testimonios</button>
+    </section>
   ` : isProfile ? `
     <div class="panel-head" style="background:${mc.color}">
       <div class="badge-row">
@@ -1058,6 +1403,32 @@ data.forEach((mc, i) => {
   `;
   panels.appendChild(panel);
 });
+
+document.querySelectorAll('[data-community-view]').forEach(button => {
+  button.addEventListener('click', () => {
+    const selectedView = button.dataset.communityView;
+    document.querySelectorAll('[data-community-view]').forEach(tab => {
+      const isSelected = tab.dataset.communityView === selectedView;
+      tab.classList.toggle('active', isSelected);
+      tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    });
+    document.querySelectorAll('.community-subpanel').forEach(subpanel => {
+      const isSelected = subpanel.id === 'community-' + selectedView;
+      subpanel.classList.toggle('active', isSelected);
+      subpanel.hidden = !isSelected;
+    });
+  });
+});
+
+const testimonialsMore = document.getElementById('testimonialsMore');
+const testimonialGrid = document.getElementById('testimonialGrid');
+if (testimonialsMore && testimonialGrid) {
+  testimonialsMore.addEventListener('click', () => {
+    const isExpanded = testimonialGrid.classList.toggle('expanded');
+    testimonialsMore.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    testimonialsMore.textContent = isExpanded ? 'Mostrar menos testimonios' : 'Ver más testimonios';
+  });
+}
 
 document.querySelectorAll('[data-open-profile]').forEach(link => {
   link.addEventListener('click', event => {
