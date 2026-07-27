@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Master Class de IA para Abogados 2026 — EDD</title>
 <meta name="description" content="Información detallada de cada Master Class de IA para Abogados 2026, impartida por Joel Gómez Treviño para la Escuela de Derecho Digital.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="canonical" href="https://masterclassedd.netlify.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
@@ -57,13 +60,13 @@
   a{color:inherit;}
 
   header.site{
-    padding:36px 24px 28px;
+    padding:36px 20px 28px;
     border-bottom:1px solid var(--line);
   }
   .header-inner{
-    display:flex;
+    display:grid;
+    grid-template-columns:300px minmax(0,1fr);
     align-items:center;
-    justify-content:center;
     gap:28px;
     max-width:1040px;
     margin:0 auto;
@@ -87,11 +90,11 @@
   .header-logo{
     height:96px;
     width:auto;
-    flex:0 0 auto;
+    max-width:100%;
+    justify-self:center;
   }
   .header-text{
     text-align:left;
-    flex:1 1 auto;
     min-width:0;
   }
   h1.site-title{
@@ -110,9 +113,9 @@
     line-height:1.6;
   }
 
-  @media (max-width:640px){
+  @media (max-width:760px){
     .header-inner{
-      flex-direction:column;
+      grid-template-columns:minmax(0,1fr);
       text-align:center;
       gap:16px;
     }
@@ -770,6 +773,15 @@
   }
   .footer-item .ico{font-size:20px;display:block;margin-bottom:6px;}
   .footer-item .t{font-size:13px;font-weight:700;color:var(--ink);}
+  .footer-item--incluye .t{display:block;}
+  .footer-item--incluye .benefit-note{
+    display:block;
+    margin-top:5px;
+    color:var(--ink-soft);
+    font-size:10px;
+    font-weight:500;
+    line-height:1.3;
+  }
 
   .footer-contact{
     display:flex;
@@ -890,16 +902,32 @@
 <footer class="site">
   <div class="footer-title">Todos los Master Class incluyen</div>
   <div class="footer-grid">
-    <div class="footer-item footer-item--incluye"><span class="ico">📡</span><span class="t">Clases en vivo vía Internet</span></div>
-    <div class="footer-item footer-item--incluye"><span class="ico">▶️</span><span class="t">Acceso a las grabaciones</span></div>
-    <div class="footer-item footer-item--incluye"><span class="ico">📄</span><span class="t">Material de apoyo</span></div>
-    <div class="footer-item footer-item--incluye"><span class="ico">🏅</span><span class="t">Constancia digital</span></div>
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">📡</span>
+      <span class="t">Clases en vivo</span>
+      <span class="benefit-note">Vía Google Meet o equivalente</span>
+    </div>
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">▶️</span>
+      <span class="t">Acceso a las grabaciones</span>
+      <span class="benefit-note">Durante 60 días</span>
+    </div>
+    <div class="footer-item footer-item--incluye">
+      <span class="ico">📄</span>
+      <span class="t">Material de apoyo</span>
+      <span class="benefit-note">En formato PDF o URLs</span>
+    </div>
+    <div class="footer-item footer-item--incluye footer-item--diploma">
+      <span class="ico">🏅</span>
+      <span class="t">Diploma</span>
+      <span class="benefit-note">El diploma de participación se entrega en formato digital únicamente a las personas que asistan a todas las sesiones.</span>
+    </div>
   </div>
 
   <div class="footer-grid">
     <div class="footer-item footer-item--incluye">
       <span class="ico">🕕</span>
-      <span class="t">Horario único: 18:30 a 21:00 h · Hora de la CDMX</span>
+      <span class="t">Horario único: 18:30 a 21:00 h<br>Hora de la CDMX</span>
     </div>
     <div class="footer-item footer-item--incluye">
       <span class="ico">💳</span>
@@ -1500,7 +1528,17 @@ document.querySelectorAll('[data-open-profile]').forEach(link => {
 });
 
 document.querySelectorAll('[data-open-course]').forEach(button => {
-  button.addEventListener('click', () => activate(button.dataset.openCourse));
+  button.addEventListener('click', () => {
+    const courseId = button.dataset.openCourse;
+    activate(courseId);
+
+    requestAnimationFrame(() => {
+      document.getElementById('panel-' + courseId)?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
+  });
 });
 
 document.querySelector('[data-open-cover]').addEventListener('click', event => {
