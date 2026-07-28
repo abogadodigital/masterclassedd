@@ -1193,7 +1193,7 @@ data.forEach((mc, i) => {
 
     const option = document.createElement('option');
     option.value = mc.id;
-    option.textContent = `${i}. ${mc.tabLabel || (isProfile ? 'Instructor' : mc.name)} — ${mc.tabName || (isProfile ? 'Semblanza curricular' : mc.date)}`;
+    option.textContent = `${i}. ${mc.tabLabel || (isProfile ? 'Instructor' : mc.name)} (${mc.tabName || (isProfile ? 'Semblanza curricular' : mc.date)})`;
     masterClassSelect.appendChild(option);
   }
 
