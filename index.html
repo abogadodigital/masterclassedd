@@ -160,17 +160,11 @@
     font-family:inherit;
     transition:background .15s ease, transform .1s ease;
   }
-  .tab-btn:hover{background:#eef1f6;}
-  .tab-btn[data-id="servidores"]:hover{
-    background:#fff3b8;
-    border-color:#d4a017;
+  .tab-btn:not(.active):hover{
+    background:color-mix(in srgb, var(--tab-color) 14%, white);
+    border-color:var(--tab-color);
+    border-left-color:var(--tab-color);
     transform:translateX(2px);
-  }
-  .tab-btn[data-id="servidores"].active,
-  .tab-btn[data-id="servidores"].active:hover{
-    background:#a66f00;
-    border-color:#a66f00;
-    transform:none;
   }
   .tab-btn.active{
     background:var(--tab-color);
@@ -179,6 +173,23 @@
   .tab-btn.active .tab-date,
   .tab-btn.active .tab-name{color:#fff;}
   .tab-icon{font-size:20px;line-height:1;flex:0 0 auto;}
+  .tab-btn[data-id="instructor"]{
+    position:relative;
+    padding-right:66px;
+  }
+  .tab-instructor-photo{
+    position:absolute;
+    top:50%;
+    right:10px;
+    width:44px;
+    height:44px;
+    border:2px solid #fff;
+    border-radius:50%;
+    object-fit:cover;
+    transform:translateY(-50%);
+    filter:drop-shadow(0 2px 4px rgba(18,33,58,.2));
+    pointer-events:none;
+  }
   .tab-date{
     display:block;
     font-size:11px;
@@ -436,6 +447,24 @@
     color:var(--ink-soft);
     margin-top:2px;
   }
+  .info-chip--instructor{
+    position:relative;
+    min-height:68px;
+    padding-right:70px;
+  }
+  .instructor-photo{
+    position:absolute;
+    top:50%;
+    right:11px;
+    width:48px;
+    height:48px;
+    border:2px solid #fff;
+    border-radius:50%;
+    object-fit:cover;
+    transform:translateY(-50%);
+    filter:drop-shadow(0 2px 4px rgba(18,33,58,.18));
+    pointer-events:none;
+  }
   .instructor-link{
     color:var(--panel-color,var(--ink));
     font-weight:800;
@@ -489,6 +518,38 @@
     border-radius:2px;
     background:var(--panel-color,#333);
   }
+  .panel-next-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+  }
+  .panel-next-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:150px;
+    min-height:44px;
+    border:1px solid var(--panel-color);
+    border-radius:10px;
+    padding:11px 20px;
+    background:var(--panel-color);
+    color:#fff;
+    font:700 15px/1.2 inherit;
+    cursor:pointer;
+    box-shadow:0 3px 9px rgba(18,33,58,.12);
+    transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+  }
+  .panel-next-btn:hover{
+    filter:brightness(.92);
+    transform:translateY(-1px);
+    box-shadow:0 5px 12px rgba(18,33,58,.17);
+  }
+  .panel-next-btn:focus-visible{
+    outline:3px solid color-mix(in srgb,var(--panel-color) 25%,transparent);
+    outline-offset:3px;
+  }
 
   .profile-intro{
     margin:0 0 22px;
@@ -496,6 +557,24 @@
     font-size:16.5px;
     font-weight:600;
     line-height:1.65;
+  }
+  .profile-hero{
+    position:relative;
+    min-height:150px;
+    padding-right:170px;
+  }
+  .profile-hero-photo{
+    position:absolute;
+    top:50%;
+    right:24px;
+    width:116px;
+    height:116px;
+    border:3px solid rgba(255,255,255,.92);
+    border-radius:50%;
+    object-fit:cover;
+    transform:translateY(-50%);
+    filter:drop-shadow(0 4px 8px rgba(18,33,58,.25));
+    pointer-events:none;
   }
   .profile-stats{
     display:grid;
@@ -616,6 +695,17 @@
     border-radius:11px;
     background:#fff;
     overflow:hidden;
+    transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease;
+  }
+  .community-group:hover{
+    border-color:var(--panel-color);
+    background:color-mix(in srgb,var(--panel-color) 4%,white);
+    box-shadow:0 5px 14px rgba(49,92,109,.12);
+    transform:translateY(-1px);
+  }
+  .community-group[open]{
+    border-color:color-mix(in srgb,var(--panel-color) 58%,var(--line));
+    background:color-mix(in srgb,var(--panel-color) 3%,white);
   }
   .community-group summary{
     padding:15px 42px 15px 16px;
@@ -624,10 +714,20 @@
     font-weight:800;
     line-height:1.35;
     cursor:pointer;
+    transition:background .16s ease,color .16s ease;
+  }
+  .community-group summary:hover{
+    background:color-mix(in srgb,var(--panel-color) 10%,white);
+    color:var(--panel-color);
   }
   .community-group[open] summary{
-    border-bottom:1px solid var(--line);
-    background:var(--bg-soft);
+    border-bottom:1px solid color-mix(in srgb,var(--panel-color) 32%,var(--line));
+    background:color-mix(in srgb,var(--panel-color) 9%,white);
+    color:var(--panel-color);
+  }
+  .community-group summary:focus-visible{
+    outline:3px solid color-mix(in srgb,var(--panel-color) 25%,transparent);
+    outline-offset:-3px;
   }
   .community-group ul{
     margin:0;
@@ -843,6 +943,15 @@
     .profile-stats{
       grid-template-columns:repeat(2,minmax(0,1fr));
     }
+    .profile-hero{
+      min-height:126px;
+      padding-right:118px;
+    }
+    .profile-hero-photo{
+      right:18px;
+      width:82px;
+      height:82px;
+    }
     .community-stats,
     .community-groups,
     .testimonial-grid{
@@ -868,6 +977,9 @@
       padding:24px 20px;
     }
     .registration-cta{
+      width:100%;
+    }
+    .panel-next-btn{
       width:100%;
     }
   }
@@ -1172,6 +1284,7 @@ data.forEach((mc, i) => {
   const isProfile = mc.type === 'profile';
   const isCover = mc.type === 'cover';
   const isCommunity = mc.type === 'community';
+  const nextItem = data[i + 1];
   if (!isCover) {
     const btn = document.createElement('button');
     btn.className = 'tab-btn';
@@ -1187,7 +1300,8 @@ data.forEach((mc, i) => {
       <span>
         <span class="tab-date">${mc.tabLabel || (isProfile ? 'Instructor' : mc.date)}</span>
         <span class="tab-name">${mc.tabName || (isProfile ? 'Semblanza curricular' : mc.name)}</span>
-      </span>`;
+      </span>
+      ${isProfile ? '<img class="tab-instructor-photo" src="joel-gomez-trevino.png" alt="" aria-hidden="true">' : ''}`;
     btn.addEventListener('click', () => activate(mc.id));
     tabNav.appendChild(btn);
 
@@ -1259,7 +1373,7 @@ data.forEach((mc, i) => {
       <p class="community-intro">Abogados de México, Argentina, Chile, Colombia, Ecuador, Paraguay y Portugal han cursado nuestros programas pioneros de capacitación ejecutiva.</p>
 
       <div class="community-groups">
-        <details class="community-group" open>
+        <details class="community-group">
           <summary>Poder judicial y servicio público</summary>
           <ul>
             <li>300 abogados postulantes y miembros del Poder Judicial de Ecuador.</li>
@@ -1267,7 +1381,7 @@ data.forEach((mc, i) => {
             <li>10 abogados de la Suprema Corte de Justicia de la Nación.</li>
           </ul>
         </details>
-        <details class="community-group" open>
+        <details class="community-group">
           <summary>Firmas, empresas y departamentos jurídicos</summary>
           <ul>
             <li>80 socios y asociados de una de las firmas de abogados más grandes de México.</li>
@@ -1391,16 +1505,21 @@ data.forEach((mc, i) => {
 
       <button class="testimonials-more" id="testimonialsMore" type="button" aria-expanded="false" aria-controls="testimonialGrid">Ver más testimonios</button>
     </section>
+
+    <div class="panel-next-row">
+      <button class="panel-next-btn" type="button" data-open-next="${nextItem.id}" aria-label="Siguiente: ${nextItem.name}">Siguiente →</button>
+    </div>
   ` : isProfile ? `
-    <div class="panel-head" style="background:${mc.color}">
+    <div class="panel-head profile-hero" style="background:${mc.color}">
       <div class="badge-row">
         <span class="icon">${mc.icon}</span>
         <span class="date-pill">Semblanza curricular</span>
       </div>
       <h2>Joel Gómez Treviño</h2>
+      <img class="profile-hero-photo" src="joel-gomez-trevino.png" alt="Joel Gómez Treviño">
     </div>
 
-    <p class="profile-intro">Abogado digital, profesor universitario y autor de reformas pioneras relacionadas con el derecho digital, con una trayectoria de 30 años vinculando el derecho, la tecnología y la innovación.</p>
+    <p class="profile-intro">Abogado digital, profesor universitario y autor de reformas pioneras relacionadas con el derecho digital, con una trayectoria de 30 años vinculando el derecho con la tecnología en América Latina.</p>
 
     <div class="profile-stats" aria-label="Trayectoria destacada">
       <div class="profile-stat"><strong>30</strong><span>años como abogado digital</span></div>
@@ -1445,7 +1564,7 @@ data.forEach((mc, i) => {
       <div class="info-chip"><span class="label">Fecha</span><span class="value">${mc.date}</span></div>
       <div class="info-chip"><span class="label">Horario</span><span class="value">${mc.schedule || '18:30 – 21:00 h'}<span class="value-sub">Hora de la CDMX</span></span></div>
       <div class="info-chip"><span class="label">Inversión</span><span class="value">${mc.price || '$2,450 MXN'}<span class="value-sub">${mc.priceSub || '$140 USD'}</span></span></div>
-      <div class="info-chip"><span class="label">${mc.instructorLabel || 'Instructor'}</span><span class="value">${mc.instructor || '<a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a>'}</span></div>
+      <div class="info-chip${mc.instructor ? '' : ' info-chip--instructor'}"><span class="label">${mc.instructorLabel || 'Instructor'}</span><span class="value">${mc.instructor || '<a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a>'}</span>${mc.instructor ? '' : '<img class="instructor-photo" src="joel-gomez-trevino.png" alt="" aria-hidden="true">'}</div>
       ${mc.discount ? `<div class="info-chip"><span class="label">Promoción</span><span class="value">${mc.discount}</span></div>` : ''}
     </div>
 
@@ -1471,6 +1590,12 @@ data.forEach((mc, i) => {
       <ul class="bullets">
         ${mc.tools.map(tool => `<li>${tool}</li>`).join('')}
       </ul>
+    </div>
+    ` : ''}
+
+    ${nextItem ? `
+    <div class="panel-next-row">
+      <button class="panel-next-btn" type="button" data-open-next="${nextItem.id}" aria-label="Siguiente: ${nextItem.tabName || nextItem.name}">Siguiente →</button>
     </div>
     ` : ''}
   `;
@@ -1538,6 +1663,20 @@ document.querySelectorAll('[data-open-course]').forEach(button => {
 
     requestAnimationFrame(() => {
       document.getElementById('panel-' + courseId)?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
+  });
+});
+
+document.querySelectorAll('[data-open-next]').forEach(button => {
+  button.addEventListener('click', () => {
+    const nextId = button.dataset.openNext;
+    activate(nextId);
+
+    requestAnimationFrame(() => {
+      document.getElementById('panel-' + nextId)?.scrollIntoView({
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
         block: 'start'
       });
