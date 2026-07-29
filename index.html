@@ -447,24 +447,6 @@
     color:var(--ink-soft);
     margin-top:2px;
   }
-  .info-chip--instructor{
-    position:relative;
-    min-height:68px;
-    padding-right:70px;
-  }
-  .instructor-photo{
-    position:absolute;
-    top:50%;
-    right:11px;
-    width:48px;
-    height:48px;
-    border:2px solid #fff;
-    border-radius:50%;
-    object-fit:cover;
-    transform:translateY(-50%);
-    filter:drop-shadow(0 2px 4px rgba(18,33,58,.18));
-    pointer-events:none;
-  }
   .instructor-link{
     color:var(--panel-color,var(--ink));
     font-weight:800;
@@ -1564,7 +1546,7 @@ data.forEach((mc, i) => {
       <div class="info-chip"><span class="label">Fecha</span><span class="value">${mc.date}</span></div>
       <div class="info-chip"><span class="label">Horario</span><span class="value">${mc.schedule || '18:30 – 21:00 h'}<span class="value-sub">Hora de la CDMX</span></span></div>
       <div class="info-chip"><span class="label">Inversión</span><span class="value">${mc.price || '$2,450 MXN'}<span class="value-sub">${mc.priceSub || '$140 USD'}</span></span></div>
-      <div class="info-chip${mc.instructor ? '' : ' info-chip--instructor'}"><span class="label">${mc.instructorLabel || 'Instructor'}</span><span class="value">${mc.instructor || '<a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a>'}</span>${mc.instructor ? '' : '<img class="instructor-photo" src="joel-gomez-trevino.png" alt="" aria-hidden="true">'}</div>
+      <div class="info-chip"><span class="label">${mc.instructorLabel || 'Instructor'}</span><span class="value">${mc.instructor || '<a class="instructor-link" href="#panel-instructor" data-open-profile>Joel Gómez Treviño</a>'}</span></div>
       ${mc.discount ? `<div class="info-chip"><span class="label">Promoción</span><span class="value">${mc.discount}</span></div>` : ''}
     </div>
 
